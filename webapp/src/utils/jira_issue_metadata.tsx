@@ -58,7 +58,7 @@ export function getIssueTypes(metadata: IssueMetadata | null, projectKey: string
     if (!project) {
         return [];
     }
-    return project.issuetypes.filter((i) => !i.subtask);
+    return project.issuetypes;
 }
 
 export function getIssueValues(metadata: ProjectMetadata, projectKey: string): ReactSelectOption[] {
@@ -178,9 +178,7 @@ function isValidFieldForFilter(field: JiraField): boolean {
         return false;
     }
 
-    return allowedTypes.includes(type) || (custom && acceptedCustomTypesForFilters.includes(custom)) ||
-    type === 'option' || // single select
-    (type === 'array' && allowedArrayTypes.includes(items));
+    return true
 }
 
 export function getCustomFieldFiltersForProjects(metadata: IssueMetadata | null, projectKeys: string[]): FilterField[] {
