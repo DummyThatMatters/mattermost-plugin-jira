@@ -178,7 +178,9 @@ function isValidFieldForFilter(field: JiraField): boolean {
         return false;
     }
 
-    return true
+    return allowedTypes.includes(type) || (custom && acceptedCustomTypesForFilters.includes(custom)) ||
+    type === 'option' || // single select
+    (type === 'array' && allowedArrayTypes.includes(items));
 }
 
 export function getCustomFieldFiltersForProjects(metadata: IssueMetadata | null, projectKeys: string[]): FilterField[] {
